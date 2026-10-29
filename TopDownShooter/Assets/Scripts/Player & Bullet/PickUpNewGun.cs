@@ -1,0 +1,101 @@
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+public class PickUpNewGun : MonoBehaviour
+{
+    public static int selectedGun = 0;
+    [SerializeField] GameObject GunPickupPrefab;
+    [SerializeField] Image gun1;
+    [SerializeField] Image gun2;
+    //input variables
+    bool pickupGunPressed = false;
+    private void Awake()
+    {
+        //reset static variables
+        selectedGun = 0;
+    }
+    void Start()
+    {
+        gun1.enabled = true;
+        gun2.enabled = false;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        int oldGunID = -1;
+        if (pickupGunPressed && collision.gameObject.GetComponent<GunPickup>() != null)
+        {
+            //sets pickupGunPressed to false so it does not spam switch weapons when button is held
+            pickupGunPressed = false;
+            int gunID = collision.gameObject.GetComponent<GunPickup>().gunIndex;
+            //if the selected gun is index 0 or 2 (slot 1 or both) switch out the first gun slot
+            if(selectedGun == 0 || selectedGun == 2)
+            {
+                bool[] temp = GetComponentInChildren<PlayerShoot>().selectedGun1;
+                for(int i = 0; i < temp.Length; i++)
+                {
+                    if (temp[i])
+                    {
+                        oldGunID = i;
+                        temp[i] = false;
+                        break;
+                    }
+                }
+                temp[gunID] = true;
+            }
+            //if the selected gun is index 1 switch out the second gun slot
+            if (selectedGun == 1)
+            {
+
+                bool[] temp = GetComponentInChildren<PlayerShoot>().selectedGun2;
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    if (temp[i])
+                    {
+                        oldGunID = i;
+                        temp[i] = false;
+                        break;
+                    }
+                }
+                temp[gunID] = true;
+            }
+            //if a weapon was already equipt in the slot, will drop a gun pickup orb that is the old gun id
+            if (oldGunID > -1)
+            {
+                Vector3 pos = collision.gameObject.transform.position;
+                pos.y += 1;
+                GunPickup gunPickup = Instantiate(GunPickupPrefab, pos, Quaternion.identity).GetComponent<GunPickup>();
+                gunPickup.gunIndex = oldGunID;
+                gunPickup.randomWeapon = false;
+                Destroy(collision.gameObject);
+            }
+            PlayerShoot.pickedUpNewGun = true;
+            Destroy(collision.gameObject);
+        }
+    }
+    //updaters for inputs
+    public void OnSwitchSelectedWeapon(InputValue Value)
+    {
+        selectedGun++;
+        selectedGun %= 3;
+        if (selectedGun == 0)
+        {
+            gun1.enabled = true;
+            gun2.enabled = false;
+        }
+        else if (selectedGun == 1)
+        {
+            gun1.enabled = false;
+            gun2.enabled = true;
+        }
+        else
+        {
+            gun1.enabled = true;
+            gun2.enabled = true;
+        }
+    }
+    public void OnPickupWeapon(InputValue Value)
+    {
+        pickupGunPressed = Value.isPressed;
+    }
+}
