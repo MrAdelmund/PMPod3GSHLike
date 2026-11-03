@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] GameObject defaultSelectedButton;
     [SerializeField] Sprite[] gunSprites;
     [SerializeField] Image SelectGunUIImage;
+    [SerializeField] CanvasGroup TutorialCanvasGroup;
     GameObject lastSelectedObject;
     void Start()
     {
