@@ -28,4 +28,5 @@ public class EnemySpawnerTriggerBox : MonoBehaviour
                 EnemySpawner.ClearEnemySpawnQueue();
         }
     }
+
 }
