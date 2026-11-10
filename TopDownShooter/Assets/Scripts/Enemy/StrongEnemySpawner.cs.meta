@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Level2meleeEnemyPrefab: {fileID: 1015342598673656469, guid: f5e5e4619c4951f4c86349033be047f3,
+  - Level2meleeEnemyPrefab: {fileID: 5953323052629116227, guid: c504846da72a8eb4d80511332aebdc65,
       type: 3}
-  - Level2rangedEnemyPrefab: {fileID: 8496856244100690870, guid: 9c4a5f680d0f7a7409d1eae2bbeb6bbd,
+  - Level2rangedEnemyPrefab: {fileID: 614902881828672292, guid: 586c004307957204f84e79672406c24e,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
