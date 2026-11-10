@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class trongMeleeEnemyManager : MonoBehaviour
+public class StrongMeleeEnemyManager : MonoBehaviour
 {
     [Header("Melee Enemy Config")]
     [SerializeField] float moveSpeed = 10;

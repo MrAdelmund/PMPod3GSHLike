@@ -19,13 +19,13 @@ public class StrongEnemySpawnerTriggerBox : MonoBehaviour
         {
             ran = true;
             if (addToEnemySpawnQueue)
-                EnemySpawner.AddToEnemySpawnQueue(amountOfLevel2RangedEnemiesToAdd, amountOfLevel2MeleeEnemiesToAdd);
+                StrongEnemySpawner.AddToEnemySpawnQueue(amountOfLevel2RangedEnemiesToAdd, amountOfLevel2MeleeEnemiesToAdd);
             if (pauseEnemySpawning)
-                EnemySpawner.PauseEnemySpawning();
+                StrongEnemySpawner.PauseEnemySpawning();
             if (resumeEnemySpawning)
-                EnemySpawner.ResumeEnemySpawning();
+                StrongEnemySpawner.ResumeEnemySpawning();
             if (clearEnemySpawnQueue)
-                EnemySpawner.ClearEnemySpawnQueue();
+                StrongEnemySpawner.ClearEnemySpawnQueue();
         }
     }
 
